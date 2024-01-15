@@ -10,12 +10,12 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
-
+import org.springframework.hateoas.RepresentationModel;
 
 //Entity
 @Entity
 @Table(name= "CUSTOM_USER")
-public class User {
+public class User extends RepresentationModel {
 	
 	@Id
 	@GeneratedValue
