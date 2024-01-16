@@ -4,8 +4,7 @@ import java.util.List;
 
 import org.springframework.hateoas.RepresentationModel;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonFilter;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -19,7 +18,8 @@ import jakarta.validation.constraints.Size;
 //Entity
 @Entity
 @Table(name= "CUSTOM_USER")
-@JsonIgnoreProperties({"firstname", "lastname"})
+// @JsonIgnoreProperties({"firstname", "lastname"}) - Static Filtering JsonIgnore
+@JsonFilter(value="userFilter")
 public class User extends RepresentationModel {
 	
 	@Id
@@ -43,8 +43,8 @@ public class User extends RepresentationModel {
 	@Column(name = "ROLE", length = 50, nullable=false)
 	private String role;
 	
-	@Column(name = "SSN", length=50, nullable=true, unique=true)
-	@JsonIgnore
+	@Column(name = "SSN", length=50, nullable=false, unique=true)
+	// @JsonIgnore -- Static Filtering Json Ignore
 	private String ssn;
 	
 	@OneToMany(mappedBy = "user")
